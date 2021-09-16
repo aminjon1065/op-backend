@@ -22,7 +22,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-
+        $fileName = null;
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $fileName = time() . '_' . $file->getClientOriginalName();
