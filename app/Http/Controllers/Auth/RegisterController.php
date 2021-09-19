@@ -29,12 +29,16 @@ class RegisterController extends Controller
             $file->move('avatars/', $fileName);
         }
 
-        $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'avatar' => $fileName
-        ]);
+        try {
+            $user = User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'avatar' => $fileName
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json('Duplicate email or incorrect data', 500);
+        }
 
         return response('Congratulation, welcome ' . $user['name'], 201);
     }
