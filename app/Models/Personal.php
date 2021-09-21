@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Personal extends Model
 {
     use HasFactory;
+
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
